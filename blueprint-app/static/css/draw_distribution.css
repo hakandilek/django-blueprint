@@ -1,0 +1,28 @@
+/**  Canvas styles for drawing distribution graphics _hd */
+.canvas {
+	position: relative;
+	width: 100%;
+	height: 20px;
+}
+
+.label_holder {
+	position:relative;
+	font-size: 8px;
+}
+
+.label_holder_l {
+	position:absolute;
+	top:-5px;
+	left:0px;
+}
+
+.label_holder_r {
+	position:absolute;
+	top:-5px;
+	right:5px;
+}
+
+/* distribution header */
+th#distribution_header {
+	width : 320px;
+}

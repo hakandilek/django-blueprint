@@ -1,0 +1,23 @@
+{% extends "common/list.html" %}
+{% load i18n %}
+{% block list_info %}{% endblock %}
+{% block list_row %}
+			<tr class="{% cycle 'row1' 'row2' %}">
+				<td class="noline">{{ object.name }}</td>
+				<td class="noline">{{ object.status }}</td>
+                <td><a href="{% url blueprint.views.sample_edit key=object.id %}">{% trans "edit" %}</a></td>
+                <td><a class="delete" href="{% url blueprint.views.sample_delete key=object.id %}">{% trans "delete" %}</a></td>
+			</tr>
+{% endblock %}
+
+
+{% block form %}
+    <div class="form">
+        <form action="{% url blueprint.views.sample_create %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="key" value="{{key}}"/>
+            <div>{% trans "Name:" %}<input type="text" name="name" value="{{name}}"/></div>
+            <div><input type="submit" value="{% trans 'Submit' %}"/></div>
+        </form>
+    </div>
+{% endblock form %}

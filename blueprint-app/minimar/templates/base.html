@@ -1,0 +1,61 @@
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}"
+    xml:lang="{% firstof LANGUAGE_CODE 'en' %}"
+    lang="{% firstof LANGUAGE_CODE 'en' %}">
+  <head>
+	{% load i18n %}
+    <title>{% block title %}{% endblock %}</title>
+    {% block css %}{% endblock %}
+    {% block extra-css %}{% endblock %}
+    {% block js %}{% endblock %}
+    {% block extra-js %}{% endblock %}
+    {% block extra-head %}{% endblock %}
+  </head>
+
+  <body>
+    <div id="header">
+      <a id="logo" href="/">{% block home_logo %}{% trans "Home" %}{% endblock %}</a>
+    {% if user.is_authenticated %}
+          | {% blocktrans with user.username as username %}Welcome, {{ username }}!{% endblocktrans %}
+          | <a href="{% url django.contrib.auth.views.logout %}">{% trans 'Logout' %}</a>
+    {% else %}
+          | <a href="{% url django.contrib.auth.views.login %}">{% trans 'Login' %}</a>
+          | <a href="{% url registration.views.register %}">{% trans 'Register' %}</a>
+    {% endif %}
+    </div>
+
+    <div style="clear:both;">
+       <hr>
+    </div>
+
+    <div class="columns">
+      <div id="content" class="column">
+        {% block content-header %}
+          {% if error %}<div class="error">{{ error }}</div>{% endif %}
+          {% if info %}<div class="info">{{ info }}</div>{% endif %}
+          {% if messages %}
+            {% for message in messages %}
+              <div class="info">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+        {% endblock %}
+
+        {% block content %}{% endblock %}
+      </div>
+
+      <div id="sidebar" class="column">
+        {% block sidebar %}
+        {% endblock %}
+      </div>
+    </div>
+
+    <div id="footer">
+        <br />
+        <hr />
+        <p>Copyright 2009 - {% now "Y" %} minimalabs </p>
+    </div>
+  </body>
+</html>

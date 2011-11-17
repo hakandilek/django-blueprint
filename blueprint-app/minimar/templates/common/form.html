@@ -1,0 +1,39 @@
+{% extends "common/base_site.html" %}
+{% load i18n %}
+
+{% block content %}
+<div id="content-main">
+	{% block object-tools %}
+	{% if change %}{% if not is_popup %}
+	<ul class="object-tools"><li><a href="history/" class="historylink">{% trans "History" %}</a></li>
+		{% if has_absolute_url %}<li><a href="../../../r/{{ content_type_id }}/{{ object_id }}/" class="viewsitelink">{% trans "View on site" %}</a></li>{% endif%}
+	</ul>
+	{% endif %}{% endif %}
+	{% endblock %}
+	
+	<form enctype="multipart/form-data" action="{{ form_url }}" method="post" id="{{ form_name }}_form">{% block form_top %}{% endblock %}
+    {% block csrf %}{% csrf_token %}{% endblock %}
+	<div>
+	{% if is_popup %}<input type="hidden" name="_popup" value="1" />{% endif %}
+	{% if errors %}
+	    <p class="errornote">
+	    {% blocktrans count errors|length as counter %}Please correct the error below.{% plural %}Please correct the errors below.{% endblocktrans %}
+	    </p>
+	    <ul class="errorlist">{% for error in adminform.form.non_field_errors %}<li>{{ error }}</li>{% endfor %}</ul>
+	{% endif %}
+
+	{% block form_fields %}{% endblock %}
+
+	{% block after_form_fields %}{% endblock %}
+
+	{% block after_related_objects %}{% endblock %}
+
+	{% if add %}
+	   <script type="text/javascript">document.getElementById("{{ adminform.first_field.auto_id }}").focus();</script>
+	{% endif %}
+
+	</div>
+    {% block submit_row %}{% endblock %}
+	</form>
+</div>
+{% endblock %}

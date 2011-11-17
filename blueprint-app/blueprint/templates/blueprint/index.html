@@ -1,0 +1,15 @@
+{% extends "common/base_site.html" %}
+{% load i18n %}
+{% block title %}{% trans "blueprint"%}{% endblock %}
+aaa
+{% block content %}
+<div>
+    Welcome, to <b>blueprint</b> project.<br/>
+    Some things to do around here:
+    <ul>
+        <li><a href="{% url blueprint.views.sample_index %}">Sample Administration</a> (superuser)</li>
+        <li><a href="/_ah/admin">Admin interface</a> (admin)</li>
+        <li><a href="/accounts/register/">register</a></li>
+    </ul>
+</div>
+{% endblock %}

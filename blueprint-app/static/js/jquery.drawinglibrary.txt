@@ -1,0 +1,6 @@
+JQuery drawing library / 18.03.2011
+---------------------------- 
+   jQuery component taken from:
+   http://www.openstudio.fr/Library-for-simple-drawing-with.html?lang=en
+   
+   Used with jQuery SVG plugin 

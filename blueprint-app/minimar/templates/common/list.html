@@ -1,0 +1,77 @@
+{% extends "common/base_site.html" %}
+{% load i18n %}
+{% block content %}
+	{% block list_info %}
+	{% endblock %}
+	
+    {% block head_form %}
+    {% endblock %}
+    {% block pagination1 %}
+    {% if page_obj %}
+    <div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?">{% trans "first" %}</a>
+            <a href="{% ifnotequal page_obj.previous_page_number 1 %}?page={{ page_obj.previous_page_number }}{% else %}?{% endifnotequal %}">{% trans "previous" %}</a>
+        {% endif %}
+
+        <span class="current">
+            {% blocktrans with page_obj.number as page_number and page_obj.paginator.num_pages as page_count %}Page {{ page_number }} of <a href="?page={{ page_count }}">{{ page_count }}</a>.{% endblocktrans %}
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">{% trans "next" %}</a>
+        {% endif %}
+    </span>
+    </div>
+    {% endif %}
+    {% endblock %}
+
+	{% if object_list %}
+	<table cellspacing="0" class="expand">
+        {% if result_headers %}
+		<thead>
+			<tr>
+			{% for header in result_headers %}
+				<th{% if header.id %} id="{{ header.id }}"{% endif %}{% if header.class %} class="{{ header.class }}"{% endif %}>
+				{% if header.sortable %}<a href="{{ header.url }}">{% endif %}
+				{{ header.text|capfirst }}
+				{% if header.sortable %}</a>{% endif %}
+				</th>
+			{% endfor %}
+			</tr>
+		</thead>
+        {% endif %}
+		<tbody>
+		{% for object in object_list %}
+			{% block list_row %}
+			{% endblock %}
+		{% endfor %}
+		</tbody>
+	</table>
+	{% endif %}
+    
+    {% block pagination2 %}
+    {% if page_obj %}
+    <div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?">{% trans "first" %}</a>
+            <a href="{% ifnotequal page_obj.previous_page_number 1 %}?page={{ page_obj.previous_page_number }}{% else %}?{% endifnotequal %}">{% trans "previous" %}</a>
+        {% endif %}
+
+        <span class="current">
+            {% blocktrans with page_obj.number as page_number and page_obj.paginator.num_pages as page_count %}Page {{ page_number }} of <a href="?page={{ page_count }}">{{ page_count }}</a>.{% endblocktrans %}
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">{% trans "next" %}</a>
+        {% endif %}
+    </span>
+    </div>
+    {% endif %}
+    {% endblock %}
+    {% block form %}
+    {% endblock %}
+
+{% endblock %}

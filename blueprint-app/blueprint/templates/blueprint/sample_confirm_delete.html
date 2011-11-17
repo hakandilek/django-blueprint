@@ -1,0 +1,15 @@
+{% extends "common/confirm_delete.html" %}
+{% load i18n %}
+
+{% block form %}
+    <div class="form">
+        {% blocktrans with object.name as name %}Do you really want to delete {{ name }}?{% endblocktrans %}
+        <form action="" method="post">
+            {% csrf_token %}
+            <div>
+                <a href="{% url blueprint.views.sample_index %}">{% trans "No"%}</a>
+                <input type="submit" value="{% trans 'Yes' %}"/>
+            </div>
+        </form>
+    </div>
+{% endblock form %}

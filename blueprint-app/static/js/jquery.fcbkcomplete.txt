@@ -1,0 +1,12 @@
+FCBKcomplete v 2.7.5
+--------------------
+   jQuery component taken from:
+   http://www.emposha.com/javascript/fcbkcomplete.html
+   https://github.com/emposha/FCBKcomplete
+
+Some improvements:
+  - locking (gray-out) the input area when maximum amount of input elements is reached
+  - minchars definition for the minimum number of characters needed to start json query
+  - fix: "Start to type..." is displayed after an element is selected from the drop-down list by mouse click.
+  - caption and value fields of json elements are filtered through a function
+  

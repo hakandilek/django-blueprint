@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% load i18n media %}
+{% block home_logo %}{% trans "blueprint" %}{% endblock %}
+{% block css %}
+	{% include_media 'main.css' %}
+{% endblock %}
